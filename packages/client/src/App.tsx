@@ -6,7 +6,8 @@ export default function App() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch('http://localhost:3001/health')
+      const url = import.meta.env.VITE_API_URL || 'https://localhost:3001'
+      const res = await fetch(`${url}/health`)
       const data = (await res.json()) as { message: string; status: string }
       setMessage(data.message + ' ' + data.status)
     } catch {
