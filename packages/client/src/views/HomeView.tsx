@@ -6,6 +6,10 @@ interface HomeViewProps {
   serverMessage: string
 }
 
+/**
+ * The view for the Home page.
+ * Displays the status component with data provided by the parent.
+ */
 const HomeView: Component<HomeViewProps> = (props) => {
   return (
     <>

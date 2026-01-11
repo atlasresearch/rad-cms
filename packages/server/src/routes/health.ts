@@ -13,4 +13,7 @@ router.get('/', (_req: Request, res: Response) => {
   res.json(result)
 })
 
+/**
+ * Router to handle health check requests.
+ */
 export default router

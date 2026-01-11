@@ -5,6 +5,9 @@ interface StatusProps {
   sharedConstant: string
 }
 
+/**
+ * A component that displays the client and server status messages.
+ */
 const Status: Component<StatusProps> = (props) => {
   return (
     <div class="p-4">
