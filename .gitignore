@@ -6,7 +6,6 @@ package-lock.json
 bun.lock
 playwright-report
 test-results
-pnpm-lock.yaml
 .opencode
 .env
 .env.local
