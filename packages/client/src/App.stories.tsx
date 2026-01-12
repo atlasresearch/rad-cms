@@ -10,4 +10,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/**
+ * The primary story for the App component.
+ */
 export const Primary: Story = {}
