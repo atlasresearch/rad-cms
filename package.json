@@ -1,9 +1,10 @@
 {
-  "name": "template-monorepo",
+  "name": "rad-cms",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"pnpm --filter @template/client dev\" \"pnpm --filter @template/server dev\"",
+    "dev": "concurrently \"pnpm --filter @rad-cms/client dev\" \"pnpm --filter @rad-cms/server dev\"",
+    "dev:desktop": "concurrently \"pnpm --filter @rad-cms/client dev\" \"pnpm --filter @rad-cms/server watch\" \"pnpm --filter @rad-cms/desktop dev\"",
     "build": "pnpm -r --if-present build",
     "test": "pnpm -r test",
     "certs": "mkdir -p .certs && openssl req -x509 -newkey rsa:2048 -keyout .certs/localhost.key -out .certs/localhost.cert -days 365 -nodes -subj \"/CN=localhost\"",
@@ -11,6 +12,22 @@
     "format": "oxfmt --write",
     "check": "pnpm -r check && oxlint",
     "prepare": "husky"
+  },
+  "dependencies": {
+    "@tiptap/core": "^3.15.3",
+    "@tiptap/starter-kit": "^3.15.3",
+    "@types/js-yaml": "^4.0.9",
+    "js-yaml": "^4.1.1",
+    "lucide-solid": "^0.562.0",
+    "prosemirror-commands": "^1.7.1",
+    "prosemirror-history": "^1.5.0",
+    "prosemirror-keymap": "^1.2.3",
+    "prosemirror-model": "^1.25.4",
+    "prosemirror-schema-list": "^1.5.1",
+    "prosemirror-state": "^1.4.4",
+    "prosemirror-transform": "^1.10.5",
+    "prosemirror-view": "^1.41.4",
+    "tiptap-markdown": "^0.9.0"
   },
   "devDependencies": {
     "@fastify/pre-commit": "^2.2.1",
@@ -21,8 +38,7 @@
     "oxfmt": "^0.23.0",
     "oxlint": "^1.38.0",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.16"
+    "typescript": "^5.9.3"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -31,6 +47,14 @@
     ],
     "*.{json,css,md,html}": [
       "oxfmt --write"
+    ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron",
+      "esbuild",
+      "@fastify/pre-commit",
+      "husky"
     ]
   }
 }

@@ -8,6 +8,8 @@ playwright-report
 test-results
 .opencode
 .env
+.env.*
 .env.local
+!.env.example
 
 .certs

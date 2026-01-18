@@ -1,14 +1,19 @@
 {
-  "name": "@template/server",
+  "name": "@rad-cms/server",
   "version": "1.0.0",
   "type": "module",
+  "main": "./dist/lib.js",
+  "exports": {
+    ".": "./dist/lib.js"
+  },
   "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
     "dev": "tsx watch src/index.ts",
     "check": "tsc --noEmit",
     "test": "vitest run"
   },
   "dependencies": {
-    "@template/core": "workspace:*",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
@@ -16,6 +21,10 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6"
-  }
+    "@types/express": "^5.0.6",
+    "@types/supertest": "^6.0.3",
+    "supertest": "^7.2.2",
+    "vitest": "^4.0.17"
+  },
+  "extension": "js"
 }

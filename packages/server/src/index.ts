@@ -1,29 +1,19 @@
-import dotenv from 'dotenv'
-import fs from 'node:fs'
-import https from 'node:https'
-import path from 'node:path'
+import * as dotenv from 'dotenv'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-dotenv.config({ path: '.env.local' })
-dotenv.config()
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+if (process.env.NODE_ENV === 'test') {
+  dotenv.config({ path: path.resolve(__dirname, '../.env.test') })
+} else if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({ path: path.resolve(__dirname, '../.env.dev') })
+}
 
-import cors from 'cors'
-import express from 'express'
-import healthRouter from './routes/health'
+import { app } from './app.js'
 
-const app = express()
 const port = process.env.PORT || 3001
 const host = process.env.HOST || 'localhost'
 
-app.use(cors())
-app.use(express.json())
-
-app.use('/health', healthRouter)
-
-const options = {
-  key: fs.readFileSync(path.join(process.cwd(), '../../.certs/localhost.key')),
-  cert: fs.readFileSync(path.join(process.cwd(), '../../.certs/localhost.cert'))
-}
-
-https.createServer(options, app).listen(Number(port), host, () => {
-  console.log(`Server running at https://${host}:${port}`)
+app.listen(Number(port), host, () => {
+  console.log(`Server running at http://${host}:${port}`)
 })

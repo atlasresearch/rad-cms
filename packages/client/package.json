@@ -1,5 +1,5 @@
 {
-  "name": "@template/client",
+  "name": "@rad-cms/client",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -8,11 +8,13 @@
     "dev": "vite",
     "preview": "vite preview",
     "test": "playwright test",
+    "test:integration": "playwright test --config=integration/playwright.config.ts",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@template/core": "workspace:*",
+    "@tiptap/extension-bubble-menu": "^3.15.3",
+    "@tiptap/extension-image": "^3.15.3",
     "solid-js": "^1.9.3"
   },
   "devDependencies": {

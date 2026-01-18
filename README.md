@@ -1,25 +1,32 @@
-# Template Monorepo
+# Sovereign CMS
 
-This is a modern, full-stack TypeScript monorepo template managed with **pnpm workspaces**. It provides a pre-configured environment for building scalable applications with a shared core library, a SolidJS client, and an Express server.
+**Sovereign CMS** is a local-first, peer-to-peer (P2P) version-controlled workspace for Markdown, JSON, and CSV files. It combines the speed of local editing with the decentralized collaboration power of **Radicle**.
+
+## 🌟 Core Concepts
+
+- **Local-First**: All data is stored on your local disk. Editing is zero-latency and works offline.
+- **Git Native**: The workspace is a standard Git repository.
+- **P2P Collaboration**: Uses the [Radicle](https://radicle.xyz) gossip network to sync changes directly between peers without central servers.
+- **Save vs. Publish**: Auto-saves locally for speed; explicit "Publish" step to commit and sync to the network.
 
 ## 📂 Project Structure
 
-The monorepo is organized into the following packages:
+This monorepo is managed with **pnpm workspaces**:
 
-- **`packages/client`**: A frontend application built with **SolidJS**, **Vite**, and **Tailwind CSS**. It includes **Storybook** for component development and **Playwright** for end-to-end testing.
-- **`packages/server`**: A backend server built with **Express**. It uses **tsx** for fast development execution.
-- **`packages/core`**: A shared library containing common logic, types, or utilities used by both the client and server. It is bundled using **Rollup**.
+- **`packages/desktop`**: Electron Main process, IPC bridges, and local-first logic (Git/Radicle wrappers).
+- **`packages/client`**: SolidJS + Vite frontend (Renderer process). UI components for the File Explorer, Editor, and Status bar.
+- **`packages/core`**: Shared utilities and types.
+- **`packages/server`**: (Optional) Backend components if needed.
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- **Node.js** (Latest LTS recommended)
-- **pnpm** (Package manager)
+1.  **Node.js** (LTS) & **pnpm**.
+2.  **Radicle CLI** (`rad`) installed and available in your PATH.
+3.  **Git** (`git`) installed.
 
 ### Installation
-
-Install all dependencies across the monorepo:
 
 ```bash
 pnpm install
@@ -27,63 +34,50 @@ pnpm install
 
 ### Development
 
-Start the development servers for both the client and server concurrently:
+To start the full Electron application in development mode:
+
+1.  Start the client dev server:
+    ```bash
+    pnpm --filter @rad-cms/client dev
+    ```
+2.  In a separate terminal, start the Electron Desktop app:
+    ```bash
+    pnpm --filter @rad-cms/desktop dev
+    ```
+
+_Note: You can run `pnpm dev` from the root, but ensuring the desktop process picks up the client port is critical._
+
+### Testing
+
+Run the full test suite (Unit Tests & E2E):
 
 ```bash
-pnpm dev
+pnpm test
 ```
 
-- **Client**: http://localhost:5173 (default Vite port)
-- **Server**: Check console output for port (typically configured in `src/index.ts`)
+## 🏗 Building
+
+To build all packages for production:
+
+```bash
+pnpm build
+```
+
+## 🛠 Tech Stack
+
+- **Runtime**: Electron
+- **Frontend**: SolidJS, Tailwind CSS
+- **Languages**: TypeScript
+- **P2P Network**: Radicle (`rad` CLI)
+- **VCS**: Git
 
 ## 🛠 Scripts
 
 Run these scripts from the root directory:
 
-| Script         | Description                                                |
-| :------------- | :--------------------------------------------------------- |
-| `pnpm dev`     | Starts client and server in development mode concurrently. |
-| `pnpm build`   | Builds all packages in the workspace.                      |
-| `pnpm test`    | Runs tests across all packages (Vitest & Playwright).      |
-| `pnpm lint`    | Lints code using ESLint.                                   |
-| `pnpm format`  | Formats code using Prettier.                               |
-| `pnpm check`   | Runs type checking (`tsc`) and linting.                    |
-| `pnpm prepare` | Sets up Husky git hooks.                                   |
-
-## 🧰 Tech Stack & Tooling
-
-### Core Technologies
-
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Package Manager**: [pnpm](https://pnpm.io/) (Workspaces)
-- **Build Tools**: [Vite](https://vitejs.dev/) (Client), [Rollup](https://rollupjs.org/) (Core)
-
-### Frontend (`packages/client`)
-
-- **Framework**: [SolidJS](https://www.solidjs.com/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Testing**: [Playwright](https://playwright.dev/)
-- **Documentation**: [Storybook](https://storybook.js.org/)
-
-### Backend (`packages/server`)
-
-- **Framework**: [Express](https://expressjs.com/)
-- **Runtime**: [tsx](https://github.com/privatenumber/tsx) (TypeScript execution)
-
-### Shared (`packages/core`)
-
-- **Testing**: [Vitest](https://vitest.dev/)
-
-### DevOps & Code Quality
-
-- **Linting**: [ESLint](https://eslint.org/) (v9, Flat Config)
-- **Formatting**: [Prettier](https://prettier.io/)
-- **Git Hooks**: [Husky](https://typicode.github.io/husky/) & [lint-staged](https://github.com/okonet/lint-staged)
-- **CI/CD Readiness**: Scripts are optimized for CI environments (`check`, `test`, `build`).
-
-## ⚙️ Configuration Files
-
-- `pnpm-workspace.yaml`: Defines the workspace structure.
-- `eslint.config.ts`: Root ESLint configuration (Flat Config).
-- `prettier.config.js`: Prettier configuration.
-- `tsconfig.json`: Base TypeScript configuration.
+| Script       | Description                                           |
+| :----------- | :---------------------------------------------------- |
+| `pnpm dev`   | Starts development servers.                           |
+| `pnpm build` | Builds all packages in the workspace.                 |
+| `pnpm test`  | Runs tests across all packages (Vitest & Playwright). |
+| `pnpm check` | Runs type checking (`tsc`) and linting.               |
