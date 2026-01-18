@@ -15,8 +15,8 @@ interface Props {
 }
 
 export const TiptapEditor: Component<Props> = (props) => {
-  let element!: HTMLDivElement
-  let bubbleMenuElement!: HTMLDivElement
+  let element: HTMLDivElement | undefined = undefined
+  let bubbleMenuElement: HTMLDivElement | undefined = undefined
   let editor: Editor | undefined
   const [editorState, setEditorState] = createSignal(0)
 

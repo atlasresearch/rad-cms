@@ -78,7 +78,7 @@ export const CommandPalette: Component = () => {
           <div class="flex items-center gap-2 border-b p-3 dark:border-[#2f2f2f]">
             <Search size={18} class="text-gray-400" />
             <input
-              ref={inputRef}
+              ref={(el) => (inputRef = el)}
               type="text"
               placeholder="Search pages..."
               class="flex-1 bg-transparent p-1 text-base text-[#37352f] placeholder:text-gray-400 focus:outline-none dark:text-[#D4D4D4]"

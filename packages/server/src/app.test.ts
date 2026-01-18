@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, beforeAll } from 'vitest'
 import request from 'supertest'
+import type { Express } from 'express'
 import path from 'path'
 import fs from 'fs/promises'
 import os from 'os'

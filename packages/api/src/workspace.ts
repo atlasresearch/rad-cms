@@ -87,10 +87,10 @@ export const createWorkspaceStore = (
             const defaultSpace = `${config.root}/my-workspace`
             try {
               await deps.client.fs.mkdir(defaultSpace)
-            } catch (e) {
+            } catch {
               // ignore
             }
-            setState((prev) => ({ recentWorkspaces: [defaultSpace] }))
+            setState((_prev) => ({ recentWorkspaces: [defaultSpace] }))
             await actions.setWorkspacePath(defaultSpace)
           } else if (state.recentWorkspaces.length > 0) {
             await actions.setWorkspacePath(state.recentWorkspaces[0])
