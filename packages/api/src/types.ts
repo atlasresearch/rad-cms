@@ -1,4 +1,3 @@
-// Type definitions for the exposed IPC bridge
 export interface FileEntry {
   name: string
   isDirectory: boolean
